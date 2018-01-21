@@ -1,6 +1,8 @@
 package pl.sda;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Main {
@@ -9,8 +11,13 @@ public class Main {
      */
     private static Queue queue = new Queue();
 
+    /**
+     * Skaner dostępny we wszystkich metodach tej klasy
+     * Czyta z klawiatury.
+     */
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         readFile();
 
@@ -60,11 +67,24 @@ public class Main {
      * @return
      */
     private static void addTask() {
-        Scanner scanner = new Scanner(System.in);
         Task task = new Task();
+        DateTimeFormatter isoLocalDate = DateTimeFormatter.ISO_LOCAL_DATE;
         System.out.println("Podaj tytuł zadania");
         task.setTitle(scanner.nextLine());
-        task.setCreationDate(new Date());
-        task.setExecuteDate(new Date());
+        System.out.println("Podaj datę wykonania zadania (yyyy-mm-dd)");
+
+        while (true) {
+            try {
+                LocalDate parse = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
+                task.setExecuteDate(parse);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Nieprawidłowy format daty. Spróbuj YYYY-MM-DD");
+            }
+        }
+
+        task.setCreationDate(LocalDate.now());
+
+
     }
 }

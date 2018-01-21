@@ -1,11 +1,11 @@
 package pl.sda;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Task {
     private String title;
-    private Date creationDate;
-    private Date executeDate;
+    private LocalDate creationDate;
+    private LocalDate executeDate;
 
     public void setTitle(String title) {
         this.title = title;
@@ -15,19 +15,19 @@ public class Task {
         return title;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setExecuteDate(Date executeDate) {
+    public void setExecuteDate(LocalDate executeDate) {
         this.executeDate = executeDate;
     }
 
-    public Date getExecuteDate() {
+    public LocalDate getExecuteDate() {
         return executeDate;
     }
 }
