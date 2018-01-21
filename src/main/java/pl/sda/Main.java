@@ -95,17 +95,24 @@ public class Main {
      * @throws IOException
      */
     private static void saveToFile() throws IOException {
+        //pobieram iterator
         Iterator iterator = queue.iterator();
+        //tworzę listę pomocniczą
         ArrayList<String> stringArrayList = new ArrayList<String>();
+        //sprawdzam czy jest coś wartego przeiterowania
         while (iterator.hasNext()) {
+            //pobieram następny/pierwszy
             Task next = (Task) iterator.next();
+            //korzystając z toString klasy Task zapisuję element do listy pomocniczej
             stringArrayList.add(next.toString());
         }
+        //linie listy pomocniczej zapisane do pliku
         Files.write(Paths.get("queuetask.csv"), stringArrayList, StandardOpenOption.CREATE);
     }
 
     private static void executeTask() {
-
+        Task task = (Task) queue.poll();
+        System.out.println("Zadanie " + task.getTitle() + " zostało wykonane");
     }
 
     /**
