@@ -9,7 +9,7 @@ public class Main {
     /**
      * Kolejka zadań
      */
-    private static Queue queue = new Queue();
+    private static Queue queue;
 
     /**
      * Skaner dostępny we wszystkich metodach tej klasy
@@ -18,7 +18,7 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        queue = new Queue();
         readFile();
 
         showMenu();
@@ -64,11 +64,10 @@ public class Main {
     }
 
     /**
-     * @return
+     * Pyta uzytkownika o dane do zadania i dodaje je do kolejki
      */
     private static void addTask() {
         Task task = new Task();
-        DateTimeFormatter isoLocalDate = DateTimeFormatter.ISO_LOCAL_DATE;
         System.out.println("Podaj tytuł zadania");
         task.setTitle(scanner.nextLine());
         System.out.println("Podaj datę wykonania zadania (yyyy-mm-dd)");
@@ -85,6 +84,7 @@ public class Main {
 
         task.setCreationDate(LocalDate.now());
 
-
+        queue.offer(task);
+        System.out.println("tutuaj");
     }
 }

@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class Queue implements java.util.Queue{
     private Node head;
     private Node tail;
-    private Integer size;
+    private int size = 0;
 
     @Override
     public int size() {
@@ -15,7 +15,7 @@ public class Queue implements java.util.Queue{
 
     @Override
     public boolean isEmpty() {
-        return this.size.equals(0);
+//        return this.size == 0;
     }
 
     @Override
@@ -58,6 +58,7 @@ public class Queue implements java.util.Queue{
             tail.setNext(node);
             tail = node;
         }
+        size++;
         return true;
     }
 
