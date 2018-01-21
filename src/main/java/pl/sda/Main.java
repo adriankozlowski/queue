@@ -33,22 +33,23 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showMenu();
+        do {
+            showMenu();
 
-        String choose = scanner.nextLine();
+            String choose = scanner.nextLine();
 
-        switch (choose) {
-            case "1":
-                addTask();
-                break;
-            case "2":
-                executeTask();
-                break;
-            case "3":
-                exitProgram();
-                break;
-        }
-
+            switch (choose) {
+                case "1":
+                    addTask();
+                    break;
+                case "2":
+                    executeTask();
+                    break;
+                case "3":
+                    exitProgram();
+                    break;
+            }
+        } while (true);
     }
 
     /**
@@ -84,6 +85,7 @@ public class Main {
     private static void exitProgram() {
         try {
             saveToFile();
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
