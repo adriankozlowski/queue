@@ -1,8 +1,13 @@
 package pl.sda;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -40,7 +45,22 @@ public class Main {
     }
 
     private static void readFile() {
-
+        Path path = Paths.get("queuetask.csv");
+        if (Files.exists(path)) {
+            try {
+                List<String> lines = Files.readAllLines(path);
+                for (String line : lines) {
+                    String[] split = line.split(";");
+                    Task task = new Task();
+                    task.setTitle(split[0]);
+                    task.setCreationDate(LocalDate.parse(split[1], DateTimeFormatter.ISO_LOCAL_DATE));
+                    task.setExecuteDate(LocalDate.parse(split[2], DateTimeFormatter.ISO_LOCAL_DATE));
+                    queue.offer(task);
+                }
+            } catch (IOException e) {
+                System.out.println("problem z odczytem pliku. Kolejka zostanie usunięta i zastąpiona nową");
+            }
+        }
     }
 
     private static void exitProgram() {
