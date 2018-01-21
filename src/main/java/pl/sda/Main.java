@@ -44,17 +44,28 @@ public class Main {
 
     }
 
+    /**
+     * odczytuje z pliku
+     */
     private static void readFile() {
+        //Pobieram ścieżkę do pliku queuetask.csv
         Path path = Paths.get("queuetask.csv");
+        //sprawdzam, czy plik ze ścieżki istnieje
         if (Files.exists(path)) {
             try {
+                //Odczytuje wszystkie linie z tego pliku do kolekcji stringów.
                 List<String> lines = Files.readAllLines(path);
+                //iteruję po kolekcji
                 for (String line : lines) {
+                    //dzielę całą linię na fragmenty przedzielone średnikiem
                     String[] split = line.split(";");
+                    //tworzę obiekt taska
                     Task task = new Task();
+                    //wkładam el. 0-owy do tytułu
                     task.setTitle(split[0]);
                     task.setCreationDate(LocalDate.parse(split[1], DateTimeFormatter.ISO_LOCAL_DATE));
                     task.setExecuteDate(LocalDate.parse(split[2], DateTimeFormatter.ISO_LOCAL_DATE));
+                    //dodaję do kolejki.
                     queue.offer(task);
                 }
             } catch (IOException e) {
