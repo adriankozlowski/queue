@@ -25,15 +25,19 @@ public class Queue implements java.util.Queue {
 
     @Override
     public Iterator iterator() {
-        return new Iterator() {
-            @Override
-            public boolean hasNext() {
-                return false;
+        return new Iterator<Object>() {
+
+            Node naNastepnąIterację = head;
+            Node aktualnyDoZwrócenia = head;
+
+            public boolean hasNext() {//
+                return naNastepnąIterację != null;
             }
 
-            @Override
             public Object next() {
-                return null;
+                aktualnyDoZwrócenia = naNastepnąIterację;
+                naNastepnąIterację = aktualnyDoZwrócenia.getNext();
+                return aktualnyDoZwrócenia.getValue();
             }
         };
     }

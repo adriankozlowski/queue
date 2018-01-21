@@ -30,4 +30,9 @@ public class Task {
     public LocalDate getExecuteDate() {
         return executeDate;
     }
+
+    @Override
+    public String toString() {
+        return getTitle() + ";" + getCreationDate() + ";" + getExecuteDate();
+    }
 }

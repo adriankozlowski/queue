@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +28,11 @@ public class Main {
     public static void main(String[] args) {
         queue = new Queue();
         readFile();
-
+        try {
+            saveToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         showMenu();
 
         String choose = scanner.nextLine();
@@ -75,7 +82,26 @@ public class Main {
     }
 
     private static void exitProgram() {
+        try {
+            saveToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * Zapis do pliku
+     *
+     * @throws IOException
+     */
+    private static void saveToFile() throws IOException {
+        Iterator iterator = queue.iterator();
+        ArrayList<String> stringArrayList = new ArrayList<String>();
+        while (iterator.hasNext()) {
+            Task next = (Task) iterator.next();
+            stringArrayList.add(next.toString());
+        }
+        Files.write(Paths.get("queuetask.csv"), stringArrayList, StandardOpenOption.CREATE);
     }
 
     private static void executeTask() {
