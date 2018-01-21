@@ -108,6 +108,7 @@ public class Queue implements java.util.Queue{
     public Object poll() {
         Node toReturn = head;
         head = toReturn.getNext();
+        size--;
         return toReturn;
     }
 
