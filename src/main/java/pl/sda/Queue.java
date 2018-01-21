@@ -3,7 +3,7 @@ package pl.sda;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Queue implements java.util.Queue{
+public class Queue implements java.util.Queue {
     private Node head;
     private Node tail;
     private int size = 0;
@@ -50,7 +50,7 @@ public class Queue implements java.util.Queue{
 
     @Override
     public boolean add(Object o) {
-        if(head == null){
+        if (head == null) {
             head = new Node(o);
             tail = head;
         } else {
@@ -107,14 +107,16 @@ public class Queue implements java.util.Queue{
     @Override
     public Object poll() {
         Node toReturn = head;
-        head = toReturn.getNext();
-        size--;
+        if (head != null) {
+            head = toReturn.getNext();
+            size--;
+        }
         return toReturn;
     }
 
     @Override
     public Object element() {
-        if(head == null){
+        if (head == null) {
             throw new NullPointerException();
         }
         return head;
