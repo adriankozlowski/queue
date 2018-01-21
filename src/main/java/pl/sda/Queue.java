@@ -111,7 +111,7 @@ public class Queue implements java.util.Queue {
             head = toReturn.getNext();
             size--;
         }
-        return toReturn;
+        return toReturn.getValue();
     }
 
     @Override
